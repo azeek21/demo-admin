@@ -1,0 +1,352 @@
+[
+  {
+    "id": 0,
+    "name": "Xylar",
+    "rating": 4.3134,
+    "code": "64b49448da72ef71833ec90b",
+    "employees": [21, 16, 47, 6, 24, 44, 29, 47, 2, 23]
+  },
+  {
+    "id": 1,
+    "name": "Zillidium",
+    "rating": 4.1613,
+    "code": "64b494488026a30c257e58c5",
+    "employees": [35, 39, 41, 17, 32, 11, 3, 45, 45, 31]
+  },
+  {
+    "id": 2,
+    "name": "Momentia",
+    "rating": 3.6886,
+    "code": "64b494489b0158652ed0b694",
+    "employees": [25, 35, 8, 43, 7, 34, 23, 20, 9, 25]
+  },
+  {
+    "id": 3,
+    "name": "Kongle",
+    "rating": 3.9865,
+    "code": "64b4944877e4bd1a959301be",
+    "employees": [8, 16, 3, 35, 30, 35, 21, 19, 31, 48]
+  },
+  {
+    "id": 4,
+    "name": "Extragene",
+    "rating": 3.9857,
+    "code": "64b494485f95c9aee3863aa9",
+    "employees": [6, 3, 28, 49, 42, 47, 27, 47, 25, 49]
+  },
+  {
+    "id": 5,
+    "name": "Accufarm",
+    "rating": 4.7695,
+    "code": "64b4944871332561981927dc",
+    "employees": [6, 12, 14, 13, 41, 5, 36, 13, 16, 19]
+  },
+  {
+    "id": 6,
+    "name": "Memora",
+    "rating": 0.0236,
+    "code": "64b4944815c4227784dc91ee",
+    "employees": [4, 10, 30, 49, 21, 12, 10, 40, 23, 49]
+  },
+  {
+    "id": 7,
+    "name": "Zilla",
+    "rating": 1.7307,
+    "code": "64b494483f17ca513147b13b",
+    "employees": [31, 34, 39, 45, 49, 18, 19, 24, 42, 36]
+  },
+  {
+    "id": 8,
+    "name": "Rubadub",
+    "rating": 4.1657,
+    "code": "64b4944815397fdf39fb06c2",
+    "employees": [16, 25, 11, 49, 3, 40, 45, 38, 15, 25]
+  },
+  {
+    "id": 9,
+    "name": "Endicil",
+    "rating": 4.4674,
+    "code": "64b4944894d20d66871c3908",
+    "employees": [14, 9, 15, 23, 39, 35, 45, 21, 23, 34]
+  },
+  {
+    "id": 10,
+    "name": "Applideck",
+    "rating": 4.7671,
+    "code": "64b494487670befb4fe52878",
+    "employees": [49, 44, 26, 18, 2, 17, 27, 20, 1, 30]
+  },
+  {
+    "id": 11,
+    "name": "Zoid",
+    "rating": 1.0216,
+    "code": "64b4944825a432edcd94df93",
+    "employees": [19, 38, 15, 4, 38, 31, 40, 23, 17, 20]
+  },
+  {
+    "id": 12,
+    "name": "Sarasonic",
+    "rating": 0.0264,
+    "code": "64b49448f8c2190e28a9a47d",
+    "employees": [40, 28, 31, 13, 23, 31, 26, 30, 43, 30]
+  },
+  {
+    "id": 13,
+    "name": "Songbird",
+    "rating": 1.6417,
+    "code": "64b4944812d111dce620165d",
+    "employees": [15, 39, 18, 11, 27, 8, 1, 27, 29, 46]
+  },
+  {
+    "id": 14,
+    "name": "Dancity",
+    "rating": 0.6225,
+    "code": "64b494480c46bef2c168d0fe",
+    "employees": [41, 48, 34, 23, 43, 4, 29, 32, 13, 48]
+  },
+  {
+    "id": 15,
+    "name": "Softmicro",
+    "rating": 2.9358,
+    "code": "64b49448f35e439a53d87c6b",
+    "employees": [17, 19, 27, 40, 44, 36, 26, 42, 23, 16]
+  },
+  {
+    "id": 16,
+    "name": "Inear",
+    "rating": 2.5856,
+    "code": "64b49448f21191c420e38fb3",
+    "employees": [7, 12, 3, 25, 37, 24, 15, 19, 11, 46]
+  },
+  {
+    "id": 17,
+    "name": "Ohmnet",
+    "rating": 4.731,
+    "code": "64b4944822c637b0ddd9e9ac",
+    "employees": [16, 26, 13, 43, 31, 14, 46, 42, 42, 9]
+  },
+  {
+    "id": 18,
+    "name": "Medifax",
+    "rating": 3.1749,
+    "code": "64b49448046cfde57663350c",
+    "employees": [36, 45, 26, 39, 24, 30, 28, 25, 44, 12]
+  },
+  {
+    "id": 19,
+    "name": "Decratex",
+    "rating": 2.0579,
+    "code": "64b49448313a03f81c509c2f",
+    "employees": [26, 44, 30, 22, 25, 18, 7, 49, 38, 2]
+  },
+  {
+    "id": 20,
+    "name": "Hivedom",
+    "rating": 3.8419,
+    "code": "64b49448238d320a5151efc0",
+    "employees": [39, 33, 34, 34, 42, 41, 23, 41, 4, 47]
+  },
+  {
+    "id": 21,
+    "name": "Cowtown",
+    "rating": 1.836,
+    "code": "64b494485031e63e2ddf7133",
+    "employees": [9, 40, 30, 30, 39, 16, 1, 24, 4, 41]
+  },
+  {
+    "id": 22,
+    "name": "Cujo",
+    "rating": 0.9267,
+    "code": "64b494489ad07ed306403522",
+    "employees": [43, 38, 25, 47, 30, 38, 6, 39, 29, 24]
+  },
+  {
+    "id": 23,
+    "name": "Permadyne",
+    "rating": 3.4538,
+    "code": "64b49448717b8a8697c4cf9d",
+    "employees": [43, 15, 5, 21, 3, 2, 29, 41, 35, 9]
+  },
+  {
+    "id": 24,
+    "name": "Filodyne",
+    "rating": 4.5994,
+    "code": "64b49448902afc158de10ff2",
+    "employees": [47, 44, 24, 8, 40, 22, 17, 7, 39, 26]
+  },
+  {
+    "id": 25,
+    "name": "Gonkle",
+    "rating": 4.2082,
+    "code": "64b494482229d9a92d1053c6",
+    "employees": [26, 12, 41, 18, 33, 29, 8, 23, 44, 15]
+  },
+  {
+    "id": 26,
+    "name": "Scenty",
+    "rating": 3.2161,
+    "code": "64b49448b69d5a6a4507460b",
+    "employees": [39, 21, 8, 20, 49, 1, 16, 25, 5, 3]
+  },
+  {
+    "id": 27,
+    "name": "Ziore",
+    "rating": 1.1676,
+    "code": "64b4944827b942d37567f0b2",
+    "employees": [6, 23, 27, 27, 12, 49, 23, 29, 29, 5]
+  },
+  {
+    "id": 28,
+    "name": "Jetsilk",
+    "rating": 0.9114,
+    "code": "64b49448205f4c6075fa8666",
+    "employees": [27, 35, 35, 23, 27, 1, 4, 36, 10, 13]
+  },
+  {
+    "id": 29,
+    "name": "Orbalix",
+    "rating": 4.1442,
+    "code": "64b494487be3f13ac1e03053",
+    "employees": [39, 10, 20, 4, 18, 23, 21, 24, 17, 44]
+  },
+  {
+    "id": 30,
+    "name": "Enervate",
+    "rating": 3.1491,
+    "code": "64b494481a6160368ea8cc72",
+    "employees": [10, 26, 20, 1, 16, 9, 24, 25, 41, 1]
+  },
+  {
+    "id": 31,
+    "name": "Bugsall",
+    "rating": 1.848,
+    "code": "64b4944852af2d02b086139a",
+    "employees": [4, 8, 42, 13, 11, 11, 48, 24, 12, 30]
+  },
+  {
+    "id": 32,
+    "name": "Micronaut",
+    "rating": 2.4966,
+    "code": "64b49448e73b330c3cee0f20",
+    "employees": [4, 11, 30, 9, 28, 44, 31, 34, 33, 34]
+  },
+  {
+    "id": 33,
+    "name": "Mantro",
+    "rating": 0.2042,
+    "code": "64b49448e90b9f9a4d1334a9",
+    "employees": [13, 42, 23, 21, 11, 28, 49, 17, 24, 26]
+  },
+  {
+    "id": 34,
+    "name": "Cytrak",
+    "rating": 0.8117,
+    "code": "64b49448badb2198095354e8",
+    "employees": [3, 42, 2, 15, 42, 8, 47, 24, 16, 10]
+  },
+  {
+    "id": 35,
+    "name": "Digiprint",
+    "rating": 3.986,
+    "code": "64b49448b37cb77e3496e48e",
+    "employees": [30, 37, 18, 13, 43, 45, 17, 1, 45, 43]
+  },
+  {
+    "id": 36,
+    "name": "Euron",
+    "rating": 0.612,
+    "code": "64b4944813bb5bfb636f2b2c",
+    "employees": [7, 32, 36, 39, 48, 39, 5, 21, 9, 17]
+  },
+  {
+    "id": 37,
+    "name": "Aquafire",
+    "rating": 4.7598,
+    "code": "64b4944871b4759e117ca45a",
+    "employees": [11, 4, 7, 32, 44, 32, 12, 30, 13, 7]
+  },
+  {
+    "id": 38,
+    "name": "Uniworld",
+    "rating": 4.2047,
+    "code": "64b49448ea1566062923bf17",
+    "employees": [37, 3, 40, 43, 30, 26, 19, 16, 8, 27]
+  },
+  {
+    "id": 39,
+    "name": "Quilch",
+    "rating": 2.774,
+    "code": "64b49448f498e25e2ae5d497",
+    "employees": [40, 6, 5, 10, 37, 41, 41, 9, 13, 47]
+  },
+  {
+    "id": 40,
+    "name": "Cipromox",
+    "rating": 4.5192,
+    "code": "64b49448a3dab88d75aa307a",
+    "employees": [10, 47, 39, 6, 2, 19, 25, 23, 19, 10]
+  },
+  {
+    "id": 41,
+    "name": "Slumberia",
+    "rating": 0.5141,
+    "code": "64b494489c23ba9da1439d58",
+    "employees": [6, 22, 21, 38, 9, 35, 28, 36, 29, 5]
+  },
+  {
+    "id": 42,
+    "name": "Geekko",
+    "rating": 4.6564,
+    "code": "64b4944884ebf17f1f41aed8",
+    "employees": [13, 3, 43, 6, 20, 40, 13, 41, 24, 46]
+  },
+  {
+    "id": 43,
+    "name": "Nitracyr",
+    "rating": 0.2919,
+    "code": "64b49448db82223ede1dba33",
+    "employees": [38, 28, 14, 40, 27, 31, 4, 17, 27, 26]
+  },
+  {
+    "id": 44,
+    "name": "Sportan",
+    "rating": 2.2261,
+    "code": "64b49448463b94866bd64b19",
+    "employees": [28, 2, 10, 33, 45, 18, 31, 44, 3, 26]
+  },
+  {
+    "id": 45,
+    "name": "Ziggles",
+    "rating": 4.2402,
+    "code": "64b49448bf410c9ee38ba555",
+    "employees": [10, 15, 19, 36, 42, 44, 15, 10, 30, 30]
+  },
+  {
+    "id": 46,
+    "name": "Assitia",
+    "rating": 2.3198,
+    "code": "64b4944816235034fd8f15a7",
+    "employees": [34, 18, 48, 12, 6, 26, 29, 46, 17, 10]
+  },
+  {
+    "id": 47,
+    "name": "Animalia",
+    "rating": 0.472,
+    "code": "64b49448276d491f321b872b",
+    "employees": [33, 9, 20, 39, 43, 28, 4, 27, 26, 3]
+  },
+  {
+    "id": 48,
+    "name": "Billmed",
+    "rating": 1.2013,
+    "code": "64b49448011182e00fbbb700",
+    "employees": [31, 9, 43, 26, 13, 32, 45, 35, 30, 4]
+  },
+  {
+    "id": 49,
+    "name": "Brainquil",
+    "rating": 3.3052,
+    "code": "64b49448866495f2baa00b6b",
+    "employees": [39, 7, 7, 28, 42, 35, 25, 8, 6, 49]
+  }
+]

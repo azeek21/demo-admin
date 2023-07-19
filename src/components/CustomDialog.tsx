@@ -24,13 +24,13 @@ import {
 } from "@mui/icons-material";
 
 interface Data {
-  id: number | string;
+  id: number;
   name: string;
 }
 
 interface ICustomDialogProps {
   fetchData: () => Promise<Data[]>;
-  onApprove: (data: Data[]) => Promise<void>;
+  onApprove: (data: number[]) => Promise<void>;
   onCancel: () => boolean;
   invalidateCache: () => Promise<void>;
   isOpen: boolean;
@@ -48,7 +48,7 @@ export default function CustomDialog({
   close,
 }: ICustomDialogProps) {
   const { data, isLoading, isError } = useQuery([cacheHash], fetchData);
-  const [selecteds, setSelecteds] = useState<Array<string | number>>([]);
+  const [selecteds, setSelecteds] = useState<number[]>([]);
   const mutate = useMutation({
     onSuccess: () => {
       setSelecteds([]);
@@ -58,24 +58,20 @@ export default function CustomDialog({
       alert(`SOMETHING WENT WRONG DURING UPDATE: ${err}`);
     },
     mutationFn: async () => {
-      if (data) {
-        return await onApprove(data);
+      if (selecteds.length > 0) {
+        return await onApprove(selecteds);
       }
     },
   });
 
-  function handleSelect(id: string | number) {
+  function handleSelect(id: number) {
     setSelecteds((old) => [...old, id]);
   }
 
-  function handleUnSelect(id: string | number) {
+  function handleUnSelect(id: number) {
     setSelecteds((old) => old.filter((item) => item != id));
   }
 
-  // function handleRemove
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <Dialog

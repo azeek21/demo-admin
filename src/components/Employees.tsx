@@ -1,12 +1,12 @@
 import { GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import CustomGrid from "./CustomGrid";
-import { useQuery } from "@tanstack/react-query";
-import { fetchEmployees, fetchProjects } from "../mock/mockFetch";
+import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, CircularProgress, IconButton, MenuItem } from "@mui/material";
 import SelectButton from "./SelectButton";
 import { AddOutlined, Delete } from "@mui/icons-material";
 import { Dispatch, MutableRefObject, useRef, useState } from "react";
 import CustomDialog from "./CustomDialog";
+import Fetch from "../lib/lib";
 
 const columns: GridColDef[] = [
   {
@@ -14,6 +14,7 @@ const columns: GridColDef[] = [
     headerName: "Name",
     minWidth: 300,
     flex: 1,
+    editable: true,
   },
   {
     field: "rating",
@@ -27,28 +28,30 @@ export default function Employees() {
     data: employees,
     isLoading,
     isError,
-  } = useQuery(["employees"], fetchEmployees);
+  } = useQuery(["employees"], Fetch.getEmployees);
 
   const {
     data: projects,
     isLoading: isProjectsLoading,
     isError: isProjectsError,
-  } = useQuery(["projects"], fetchProjects);
+  } = useQuery(["projects"], Fetch.getProjects);
+
+  const queryClient = useQueryClient();
 
   const additionalColumns: GridColDef[] = [
     {
-      field: "projects",
+      field: "projectIds",
       headerName: "Projects",
       minWidth: 300,
       flex: 1,
       renderCell: (params) => {
         return (
           <SelectButton
-            mainText={`Employee has ${params.row.projects.length} projects`}
+            mainText={`Employee has ${params.row.projectIds.length} projects`}
           >
-            {projects && params.row.projects.length > 0 ? (
+            {projects && params.row.projectIds.length > 0 ? (
               projects
-                .filter((p) => params.row.projects.includes(p.id))
+                .filter((p) => params.row.projectIds.includes(p.id))
                 .map((project: Project) => (
                   <MenuItem
                     onClick={() => {
@@ -77,8 +80,9 @@ export default function Employees() {
         <GridActionsCellItem
           label="Delete"
           icon={<Delete />}
-          onClick={() => {
-            console.log("DELETING: ", params.row.id);
+          onClick={async () => {
+            await Fetch.deleteEmployee(params.row);
+            queryClient.invalidateQueries(['employees']);
           }}
         />,
       ],
@@ -92,6 +96,10 @@ export default function Employees() {
         columns={[...columns, ...additionalColumns]}
         error={isError}
         isLoading={isLoading}
+        onRowEditStop={async (updatedEmployee: Employee) => {
+          const res = await Fetch.updateEmployee(updatedEmployee);
+          return res;
+        }}
       />
     </>
   );

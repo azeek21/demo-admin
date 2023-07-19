@@ -10,6 +10,7 @@ import {
   Link as MuiLink,
   createTheme,
   Container,
+  Toolbar,
 } from "@mui/material";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
@@ -29,7 +30,8 @@ export default function Layout() {
   return (
     <>
       <AppBar sx={{ px: "1rem" }}>
-        <Stack direction="row" alignItems="center">
+        <Toolbar>
+        <Stack direction="row" alignItems="center" width={"100%"}>
           <Navigation />
           <FormGroup sx={{ ml: "auto" }}>
             <FormControlLabel
@@ -46,8 +48,12 @@ export default function Layout() {
             />
           </FormGroup>
         </Stack>
+        </Toolbar>
       </AppBar>
+      <Container>
+      <Toolbar />
       <Outlet />
+      </Container>
     </>
   );
 }

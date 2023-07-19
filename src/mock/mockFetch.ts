@@ -26,4 +26,4 @@ async function fetchFeedbacks(): Promise<Feedback[]> {
   });
 }
 
-export { fetchProjects, fetchFeedbacks, fetchEmployees };
+export {  fetchFeedbacks };

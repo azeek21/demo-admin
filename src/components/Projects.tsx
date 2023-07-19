@@ -1,29 +1,13 @@
-import {
-  DataGrid,
-  GridActionsCell,
-  GridActionsCellItem,
-  GridColDef,
-} from "@mui/x-data-grid";
-import { useQuery } from "@tanstack/react-query";
-import { fetchEmployees, fetchProjects } from "../mock/mockFetch";
-import {
-  Button,
-  CircularProgress,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
+import { GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Button, CircularProgress, IconButton, MenuItem } from "@mui/material";
 import { useRef, useState } from "react";
-import {
-  AddOutlined,
-  AddTwoTone,
-  ArrowDropDown,
-  Delete,
-} from "@mui/icons-material";
+import { AddOutlined, Delete } from "@mui/icons-material";
 import SelectButton from "./SelectButton";
 import CustomGrid from "./CustomGrid";
 import CustomDialog from "./CustomDialog";
+import Fetch from "../lib/lib";
+import AddProject from "./AddProject";
 
 const columns: GridColDef[] = [
   {
@@ -49,22 +33,23 @@ const columns: GridColDef[] = [
 export default function Projects() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const projectIdRef = useRef(0);
+  const queryClient = useQueryClient();
 
   const {
     data: projects,
     isLoading,
     isError,
-  } = useQuery(["projects"], fetchProjects);
+  } = useQuery(["projects"], Fetch.getProjects);
 
   const {
     data: employees,
     isLoading: isEmployeesLoading,
     isError: isEmployeesError,
-  } = useQuery(["employees"], fetchEmployees);
+  } = useQuery(["employees"], Fetch.getEmployees);
 
   const additionalColumns: GridColDef[] = [
     {
-      field: "employees",
+      field: "employeeIds",
       headerName: "Employees",
       editable: false,
       minWidth: 200,
@@ -73,7 +58,7 @@ export default function Projects() {
       sortable: false,
       renderCell: (params) => {
         return (
-          <SelectButton mainText={`${params.row.employees.length} employees`}>
+          <SelectButton mainText={`${params.row.employeeIds.length} employees`}>
             <MenuItem sx={{ position: "sticky" }}>
               <Button
                 onClick={() => {
@@ -85,9 +70,9 @@ export default function Projects() {
               </Button>
             </MenuItem>
 
-            {employees && params.row.employees.length > 0 ? (
+            {employees && params.row.employeeIds.length > 0 ? (
               employees
-                .filter((e) => params.row.employees.includes(e.id))
+                .filter((e) => params.row.employeeIds.includes(e.id))
                 .map((employee: Employee) => (
                   <MenuItem>
                     {employee.name}
@@ -114,8 +99,9 @@ export default function Projects() {
         <GridActionsCellItem
           label="Delete"
           icon={<Delete />}
-          onClick={() => {
-            console.log("delete click", params.row.id);
+          onClick={async () => {
+            await Fetch.deleteProject(params.row);
+            queryClient.invalidateQueries(["projects"]);
           }}
         />,
       ],
@@ -128,13 +114,18 @@ export default function Projects() {
         columns={[...columns, ...additionalColumns]}
         error={isError}
         isLoading={isLoading}
+        onRowEditStop={async (updatedProject: Project) => {
+          const res = await Fetch.updateProject(updatedProject);
+          queryClient.invalidateQueries(["projects"]);
+          return res;
+        }}
       />
       <CustomDialog
         isOpen={isDialogOpen}
         fetchData={async () => {
-          const employees = await fetchEmployees();
+          const employees = await Fetch.getEmployees();
           const project = projects?.find((p) => p.id == projectIdRef.current);
-          return employees.filter((e) => !project?.employees.includes(e.id));
+          return employees.filter((e) => !project?.employeeIds.includes(e.id));
         }}
         onCancel={() => {
           if (confirm("Any changes will be discarded. Continue ?")) {
@@ -143,12 +134,16 @@ export default function Projects() {
           }
           return false;
         }}
-        onApprove={async (data) => {
-          return new Promise((res) => {
-            setTimeout(() => {
-              res();
-            }, 2000);
-          });
+        onApprove={async (addedIds: number[]) => {
+          console.log("ADDED ID`S: ", addedIds);
+          const project = projects?.find((p) => p.id == projectIdRef.current);
+          if (project) {
+            project.employeeIds = [...project.employeeIds, ...addedIds];
+            console.log("SENDING: ", project);
+            const res = await Fetch.updateProject(project);
+            console.log("UPDATE RES: ", res);
+            queryClient.invalidateQueries(["projects"]);
+          }
         }}
         cacheHash={"project-employees" + projectIdRef.current}
         close={() => {
@@ -159,6 +154,7 @@ export default function Projects() {
         }}
         title="Add Employees"
       />
+      <AddProject />
     </>
   );
 }

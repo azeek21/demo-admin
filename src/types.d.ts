@@ -14,14 +14,14 @@ type Project = {
   name: string;
   code: string;
   rating: number;
-  employees: numer[];
+  employeeIds: numer[];
 };
 
 type Employee = {
   id: number;
   name: string;
   rating: number;
-  projects: number[];
+  projectIds: number[];
 };
 
 type Feedback = {

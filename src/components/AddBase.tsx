@@ -15,12 +15,18 @@ import { useState, PropsWithChildren } from "react";
 
 interface IAddBase extends PropsWithChildren {
   title: string;
-  onSave: <T>(data: T) => any;
+  onSave: VoidFunction;
   onCancel: VoidFunction;
 }
 
-export default function AddBase({ children, title }: IAddBase) {
+export default function AddBase({
+  children,
+  title,
+  onSave,
+  onCancel,
+}: IAddBase) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleClose() {
     setIsOpen(false);
@@ -47,7 +53,13 @@ export default function AddBase({ children, title }: IAddBase) {
               Cancel
               <Cancel />
             </Button>
-            <Button>
+            <Button
+              onClick={() => {
+                setIsLoading(true);
+                onSave();
+              }}
+              disabled={isLoading}
+            >
               Save
               <Save />
             </Button>

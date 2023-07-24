@@ -32,3 +32,8 @@ type Feedback = {
   content: string;
   employees: number[];
 };
+
+type LoginData = {
+  login: string;
+  password: string;
+};

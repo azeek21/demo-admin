@@ -1,9 +1,16 @@
-import { MenuItem, OutlinedInput, Select, TextField } from "@mui/material";
+import {
+  Input,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  SelectChangeEvent,
+  TextField,
+} from "@mui/material";
 import AddBase from "./AddBase";
 import { ChangeEvent, useState } from "react";
 import Fetch from "../lib/lib";
 
-const employees = [
+const projects = [
   {
     id: 0,
     name: "Lena Mathis",
@@ -36,9 +43,9 @@ const employees = [
   },
 ];
 
-export default function AddProject() {
+export default function AddEmployee() {
   const [selecteds, setSelecteds] = useState<number[]>([]);
-  const [project, setProject] = useState({ name: "", code: "" });
+  const [employee, setEmployee] = useState({ name: "" });
 
   function handleChange(event: ChangeEvent<any>) {
     const {
@@ -46,7 +53,7 @@ export default function AddProject() {
     } = event;
     console.log("CHANGE: ", value, name);
     if (typeof value == "string") {
-      setProject((old) => ({
+      setEmployee((old) => ({
         ...old,
         [name]: value,
       }));
@@ -57,11 +64,11 @@ export default function AddProject() {
   }
 
   async function handleCreate() {
-    console.log("PROJECT: ", { ...project, employeeIds: selecteds });
-    return await Fetch.createProject({
-      ...project,
-      employeeIds: selecteds,
-    } as Project);
+    console.log("PROJECT: ", { ...employee, employeeIds: selecteds });
+    return await Fetch.createEmployee({
+      ...employee,
+      projectIds: selecteds,
+    } as Employee);
   }
 
   return (
@@ -69,21 +76,14 @@ export default function AddProject() {
       <TextField
         label="Name"
         required
-        value={project.name}
+        value={employee.name}
         name="name"
-        onChange={handleChange}
-      />
-      <TextField
-        label="Code"
-        required
-        value={project.code}
-        name="code"
         onChange={handleChange}
       />
       <Select
         value={selecteds}
         renderValue={(selecteds) => {
-          return employees
+          return projects
             .filter((e) => selecteds.includes(e.id))
             .map((e) => e.name)
             .join(", ");
@@ -92,7 +92,7 @@ export default function AddProject() {
         multiple
         onChange={handleChange as any}
       >
-        {employees.map((e) => (
+        {projects.map((e) => (
           <MenuItem key={e.id} aria-label={e.name} value={e.id}>
             {e.name}
           </MenuItem>

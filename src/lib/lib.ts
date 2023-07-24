@@ -1,23 +1,29 @@
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+const ENDPOINT = {
+  employees: BASE_URL + "employees/",
+  projects: BASE_URL + "projects/",
+  feedbacks: BASE_URL + "feedbacks/",
+  users: BASE_URL + "users/",
+};
 
 class Fetch {
   static async getEmployees(): Promise<Employee[]> {
-    const res = await axios.get("http://192.168.1.38:8080/api/v1/employees");
+    console.log("URL: ", BASE_URL);
+    const res = await axios.get(ENDPOINT.employees);
     console.log("FETCHED EMPLOYEES: ", res.data);
     return [];
   }
 
   static async getProjects(): Promise<Project[]> {
-    const res = await axios.get("http://192.168.1.38:8080/api/v1/projects");
+    const res = await axios.get(ENDPOINT.projects);
     console.log("FETCHED PROJECTS: ", res.data);
     return [];
   }
 
   static async updateEmployee(employee: Employee): Promise<Employee> {
-    const res = await axios.put(
-      "http://192.168.1.38:8080/api/v1/employees/" + employee.id,
-      employee
-    );
+    const res = await axios.put(ENDPOINT.employees + employee.id, employee);
     return {
       id: 1,
       name: "azeek",
@@ -27,10 +33,7 @@ class Fetch {
   }
 
   static async updateProject(project: Project): Promise<Project> {
-    const res = await axios.put(
-      "http://192.168.1.38:8080/api/v1/projects/" + project.id,
-      project
-    );
+    const res = await axios.put(ENDPOINT.projects + project.id, project);
     return {
       id: 1,
       name: "Front",
@@ -41,15 +44,23 @@ class Fetch {
   }
 
   static async deleteProject(project: Project): Promise<void> {
-    await axios.delete(
-      "http://192.168.1.38:8080/api/v1/projects/" + project.id
-    );
+    await axios.delete(ENDPOINT.projects + project.id);
   }
 
   static async deleteEmployee(employee: Employee): Promise<void> {
-    await axios.delete(
-      "http://192.168.1.38:8080/api/v1/employees/" + employee.id
-    );
+    await axios.delete(ENDPOINT.employees + employee.id);
+  }
+
+  static async createProject(project: Project) {
+    console.log("CREATING PROJECTS: ", project);
+    const resp = await axios.post<Project>(ENDPOINT.projects);
+    return resp.data;
+  }
+
+  static async createEmployee(employee: Employee) {
+    console.log("CREATING EMPLOYESS: ", employee);
+    const resp = await axios.post(ENDPOINT.employees);
+    return resp.data;
   }
 }
 

@@ -7,6 +7,7 @@ import { AddOutlined, Delete } from "@mui/icons-material";
 import { Dispatch, MutableRefObject, useRef, useState } from "react";
 import CustomDialog from "./CustomDialog";
 import Fetch from "../lib/lib";
+import AddEmployee from "./AddEmployee";
 
 const columns: GridColDef[] = [
   {
@@ -82,7 +83,7 @@ export default function Employees() {
           icon={<Delete />}
           onClick={async () => {
             await Fetch.deleteEmployee(params.row);
-            queryClient.invalidateQueries(['employees']);
+            queryClient.invalidateQueries(["employees"]);
           }}
         />,
       ],
@@ -101,6 +102,7 @@ export default function Employees() {
           return res;
         }}
       />
+      <AddEmployee />
     </>
   );
 }

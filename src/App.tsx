@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useNavigate } from "react-router-dom";
 import Router from "./Router";
+import Auth from "./lib/auth";
 
 const queryClient = new QueryClient();
 
@@ -24,12 +25,11 @@ function App() {
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <BrowserRouter>
-              <Router />
-            </BrowserRouter>
-          </ThemeProvider>
+          {/* <ThemeProvider theme={theme}> */}
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+          {/* </ThemeProvider> */}
         </QueryClientProvider>
       </LocalizationProvider>
     </>

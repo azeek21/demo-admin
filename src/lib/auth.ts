@@ -5,8 +5,6 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 class Auth {
   static async login(data: LoginData) {
-    sessionStorage.setItem("authed", "true");
-    return true;
     try {
       const resp = await axios.post(BASE_URL + "auth/login", data);
       if (resp.data.success) {

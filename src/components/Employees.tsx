@@ -1,11 +1,9 @@
 import { GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import CustomGrid from "./CustomGrid";
-import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, CircularProgress, IconButton, MenuItem } from "@mui/material";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { CircularProgress, IconButton, MenuItem } from "@mui/material";
 import SelectButton from "./SelectButton";
-import { AddOutlined, Delete } from "@mui/icons-material";
-import { Dispatch, MutableRefObject, useRef, useState } from "react";
-import CustomDialog from "./CustomDialog";
+import { Delete } from "@mui/icons-material";
 import Fetch from "../lib/lib";
 import AddEmployee from "./AddEmployee";
 
@@ -34,7 +32,7 @@ export default function Employees() {
   const {
     data: projects,
     isLoading: isProjectsLoading,
-    isError: isProjectsError,
+    // isError: isProjectsError,
   } = useQuery(["projects"], Fetch.getProjects);
 
   const queryClient = useQueryClient();

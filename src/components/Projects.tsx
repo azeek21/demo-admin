@@ -44,7 +44,7 @@ export default function Projects() {
   const {
     data: employees,
     isLoading: isEmployeesLoading,
-    isError: isEmployeesError,
+    // isError: isEmployeesError,
   } = useQuery(["employees"], Fetch.getEmployees);
 
   const additionalColumns: GridColDef[] = [

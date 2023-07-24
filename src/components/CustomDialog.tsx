@@ -14,14 +14,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Dispatch, useEffect, useState } from "react";
-import {
-  Add,
-  Cancel,
-  CheckOutlined,
-  Deselect,
-  Save,
-} from "@mui/icons-material";
+import { useState } from "react";
+import { Add, Cancel, CheckOutlined, Save } from "@mui/icons-material";
 
 interface Data {
   id: number;
@@ -47,7 +41,7 @@ export default function CustomDialog({
   cacheHash,
   close,
 }: ICustomDialogProps) {
-  const { data, isLoading, isError } = useQuery([cacheHash], fetchData);
+  const { data, isError } = useQuery([cacheHash], fetchData);
   const [selecteds, setSelecteds] = useState<number[]>([]);
   const mutate = useMutation({
     onSuccess: () => {
@@ -71,7 +65,6 @@ export default function CustomDialog({
   function handleUnSelect(id: number) {
     setSelecteds((old) => old.filter((item) => item != id));
   }
-
 
   return (
     <Dialog

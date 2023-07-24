@@ -1,13 +1,11 @@
 import { DarkMode as DarkModeIcon } from "@mui/icons-material";
 import {
   AppBar,
-  Button,
   FormControlLabel,
   FormGroup,
   IconButton,
   Stack,
   Switch,
-  Link as MuiLink,
   createTheme,
   Container,
   Toolbar,
@@ -15,7 +13,7 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Navigation from "./components/Navigation";
 
 export default function Layout() {

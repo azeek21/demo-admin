@@ -23,7 +23,7 @@ class Fetch {
   }
 
   static async updateEmployee(employee: Employee): Promise<Employee> {
-    const res = await axios.put(ENDPOINT.employees + employee.id, employee);
+    await axios.put(ENDPOINT.employees + employee.id, employee);
     return {
       id: 1,
       name: "azeek",
@@ -33,7 +33,7 @@ class Fetch {
   }
 
   static async updateProject(project: Project): Promise<Project> {
-    const res = await axios.put(ENDPOINT.projects + project.id, project);
+    await axios.put(ENDPOINT.projects + project.id, project);
     return {
       id: 1,
       name: "Front",

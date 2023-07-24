@@ -1,11 +1,4 @@
-import {
-  Input,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  SelectChangeEvent,
-  TextField,
-} from "@mui/material";
+import { MenuItem, OutlinedInput, Select, TextField } from "@mui/material";
 import AddBase from "./AddBase";
 import { ChangeEvent, useState } from "react";
 import Fetch from "../lib/lib";

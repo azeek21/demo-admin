@@ -1,4 +1,4 @@
-import { Add, Cancel, Delete, Save } from "@mui/icons-material";
+import { Add, Cancel, Save } from "@mui/icons-material";
 import {
   DialogActions,
   Portal,
@@ -9,7 +9,6 @@ import {
   Button,
   Fab,
   Divider,
-  Container,
 } from "@mui/material";
 import { useState, PropsWithChildren } from "react";
 
@@ -19,18 +18,13 @@ interface IAddBase extends PropsWithChildren {
   onCancel: VoidFunction;
 }
 
-export default function AddBase({
-  children,
-  title,
-  onSave,
-  onCancel,
-}: IAddBase) {
+export default function AddBase({ children, title, onSave }: IAddBase) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleClose() {
-    setIsOpen(false);
-  }
+  // function handleClose() {
+  //   setIsOpen(false);
+  // }
 
   return (
     <>

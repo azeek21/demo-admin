@@ -1,13 +1,12 @@
-import { DataGrid, GridColDef, GridEventListener } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 interface ICustomGridProps {
   columns: GridColDef[];
   error: boolean;
   data: any;
   isLoading: boolean;
-  onRowEditStop?:  (newValue: any) => Promise<any>;
+  onRowEditStop?: (newValue: any) => Promise<any>;
 }
-
 
 const inVisibleIdColumn: GridColDef = {
   field: "id",
@@ -19,7 +18,7 @@ const inVisibleIdColumn: GridColDef = {
   editable: false,
   disableColumnMenu: true,
   hideSortIcons: true,
-}
+};
 
 export default function CustomGrid({
   columns,
@@ -30,15 +29,15 @@ export default function CustomGrid({
   return (
     <>
       <DataGrid
-        columns={[inVisibleIdColumn,...columns]}
+        columns={[inVisibleIdColumn, ...columns]}
         rows={data || []}
         pageSizeOptions={[5, 15, 30, 45, 60, 75, 90, 100]}
         loading={isLoading}
         sx={{ height: "80vh", mt: "20px" }}
         editMode="row"
         processRowUpdate={onRowEditStop}
-        columnVisibilityModel={{id: false}}
-        sortModel={[{field: 'id', sort: 'asc'}]}
+        columnVisibilityModel={{ id: false }}
+        sortModel={[{ field: "id", sort: "asc" }]}
       />
     </>
   );

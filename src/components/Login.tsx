@@ -1,12 +1,9 @@
 import {
-  Container,
   FormControl,
-  TextField,
   Box,
   Dialog,
   DialogContent,
   Button,
-  Icon,
   DialogTitle,
   OutlinedInput,
   InputAdornment,
@@ -14,11 +11,7 @@ import {
   InputLabel,
   FormHelperText,
 } from "@mui/material";
-import {
-  Login as LoginIcon,
-  RemoveRedEye,
-  Visibility,
-} from "@mui/icons-material";
+import { Login as LoginIcon, Visibility } from "@mui/icons-material";
 import { useState, ChangeEvent } from "react";
 import Auth from "../lib/auth";
 import { useNavigate } from "react-router-dom";

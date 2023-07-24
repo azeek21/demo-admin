@@ -4,7 +4,7 @@ import Projects from "./components/Projects";
 import Employees from "./components/Employees";
 import Feedbacks from "./components/Feedbacks";
 import Login from "./components/Login";
-import { useState, useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import Auth from "./lib/auth";
 import Index from "./components/Index";
 

@@ -28,7 +28,6 @@ export default function AddBase({ children, title, onSave }: IAddBase) {
 
   return (
     <>
-      <Portal>
         <Dialog
           open={isOpen}
           fullWidth
@@ -65,11 +64,10 @@ export default function AddBase({ children, title, onSave }: IAddBase) {
           onClick={() => {
             setIsOpen(true);
           }}
-          sx={{ position: "fixed", bottom: "2rem", right: "2rem" }}
+          sx={{ position: "absolute", bottom: '-2.3rem', right: '-2.3rem' }}
         >
           <Add />
         </Fab>
-      </Portal>
     </>
   );
 }

@@ -3,7 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 const routes = [
   { path: "/projects", name: "Projects" },
   { path: "/employees", name: "Employees" },
-  { path: "/feedbacks", name: "Feddback" },
+  { path: "/feedbacks", name: "Feedbacks" },
+  {path: "/users", name: 'Users'},
 ];
 
 interface ICustomLinkProps {

@@ -4,6 +4,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 class Auth {
   static async login(data: LoginData) {
+  return true;
     try {
       const resp = await axios.post(BASE_URL + "auth/login", data);
       if (resp.data.success) {
@@ -19,6 +20,16 @@ class Auth {
   static async isAuthenticated() {
     const authed = sessionStorage.getItem("authed");
     return Boolean(authed);
+  }
+
+  static async logout() {
+    return true;
+    try {
+    await axios.post(BASE_URL + '/logout');
+    return true;
+    } catch (error) {
+      return false;
+    }
   }
 }
 

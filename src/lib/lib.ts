@@ -2,7 +2,7 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const ENDPOINT = {
-  employees: BASE_URL + "employees/",
+  employees: BASE_URL + "employees",
   projects: BASE_URL + "projects/",
   feedbacks: BASE_URL + "feedbacks/",
   users: BASE_URL + "users/",
@@ -10,10 +10,10 @@ const ENDPOINT = {
 
 class Fetch {
   static async getEmployees(): Promise<Employee[]> {
-    console.log("URL: ", BASE_URL);
+    console.log("URL: ", ENDPOINT.employees);
     const res = await axios.get(ENDPOINT.employees);
     console.log("FETCHED EMPLOYEES: ", res.data);
-    return [];
+    return res.data;
   }
 
   static async getProjects(): Promise<Project[]> {

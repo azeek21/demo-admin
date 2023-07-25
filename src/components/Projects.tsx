@@ -1,6 +1,6 @@
 import { GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, CircularProgress, IconButton, MenuItem } from "@mui/material";
+import { Button, CircularProgress, Container, IconButton, MenuItem, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import { AddOutlined, Delete } from "@mui/icons-material";
 import SelectButton from "./SelectButton";
@@ -107,12 +107,17 @@ export default function Projects() {
       ],
     },
   ];
+
+
+ if (isError) {
+  return <Typography typography={'h1'} color={'error'}>Something went wrong</Typography>
+}
+
   return (
-    <>
+    <Container sx={{maxWidth: 1000, maxHeight: 800, position: "relative"}}>
       <CustomGrid
         data={projects || []}
         columns={[...columns, ...additionalColumns]}
-        error={isError}
         isLoading={isLoading}
         onRowEditStop={async (updatedProject: Project) => {
           const res = await Fetch.updateProject(updatedProject);
@@ -155,6 +160,6 @@ export default function Projects() {
         title="Add Employees"
       />
       <AddProject />
-    </>
+      </Container>
   );
 }

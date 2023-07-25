@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import { useCallback, useEffect } from "react";
 import Auth from "./lib/auth";
 import Index from "./components/Index";
+import Users from "./components/Users";
 
 export default function Router() {
   const navigate = useNavigate();
@@ -24,12 +25,13 @@ export default function Router() {
 
   return (
     <Routes>
-      <Route path="login" element={<Login />} />
       <Route path="/" element={<Layout />}>
+        <Route path="login" element={<Login />} />
         <Route index element={<Index />} />
         <Route path="projects" element={<Projects />} />
         <Route path="employees" element={<Employees />} />
         <Route path="feedbacks" element={<Feedbacks />} />
+        <Route path="users" element={<Users />} />
       </Route>
     </Routes>
   );

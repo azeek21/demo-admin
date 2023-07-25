@@ -65,7 +65,9 @@ export default function AddEmployee() {
   }
 
   return (
-    <AddBase title="Add project" onSave={handleCreate} onCancel={() => {}}>
+    <AddBase title="Add employee" onSave={handleCreate} onCancel={() => {
+     return; 
+    }}>
       <TextField
         label="Name"
         required

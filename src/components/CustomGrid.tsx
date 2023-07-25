@@ -1,8 +1,8 @@
+import { Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 interface ICustomGridProps {
   columns: GridColDef[];
-  error: boolean;
   data: any;
   isLoading: boolean;
   onRowEditStop?: (newValue: any) => Promise<any>;
@@ -25,10 +25,11 @@ export default function CustomGrid({
   data,
   isLoading,
   onRowEditStop,
+
 }: ICustomGridProps) {
   return (
     <>
-      <DataGrid
+      <DataGrid        
         columns={[inVisibleIdColumn, ...columns]}
         rows={data || []}
         pageSizeOptions={[5, 15, 30, 45, 60, 75, 90, 100]}

@@ -5,7 +5,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { BrowserRouter } from "react-router-dom";
 import Router from "./Router";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      keepPreviousData: false,
+    },
+  },
+});
 
 function App() {
   return (

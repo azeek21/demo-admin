@@ -1,6 +1,13 @@
 import { GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, CircularProgress, Container, IconButton, MenuItem, Typography } from "@mui/material";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  Button,
+  CircularProgress,
+  Container,
+  IconButton,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import { useRef, useState } from "react";
 import { AddOutlined, Delete } from "@mui/icons-material";
 import SelectButton from "./SelectButton";
@@ -22,6 +29,7 @@ const columns: GridColDef[] = [
     headerName: "code",
     minWidth: 100,
     flex: 0.5,
+    editable: true,
   },
   {
     field: "rating",
@@ -44,8 +52,20 @@ export default function Projects() {
   const {
     data: employees,
     isLoading: isEmployeesLoading,
-    // isError: isEmployeesError,
+    isError: isEmployeesError,
   } = useQuery(["employees"], Fetch.getEmployees);
+
+  const mutator = useMutation({
+    mutationFn: async (project: Project) => {
+      await Fetch.updateProject(project);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["projects"]);
+    },
+    onError: (e) => {
+      alert(e);
+    },
+  });
 
   const additionalColumns: GridColDef[] = [
     {
@@ -76,7 +96,15 @@ export default function Projects() {
                 .map((employee: Employee) => (
                   <MenuItem>
                     {employee.name}
-                    <IconButton sx={{ ml: "auto" }}>
+                    <IconButton
+                      sx={{ ml: "auto" }}
+                      onClick={async () => {
+                        params.row.employeeIds = params.row.employeeIds.filter(
+                          (p: number) => p != employee.id
+                        );
+                        mutator.mutate(params.row);
+                      }}
+                    >
                       <Delete />
                     </IconButton>
                   </MenuItem>
@@ -108,13 +136,16 @@ export default function Projects() {
     },
   ];
 
-
- if (isError) {
-  return <Typography typography={'h1'} color={'error'}>Something went wrong</Typography>
-}
+  if (isError || isEmployeesError) {
+    return (
+      <Typography typography={"h1"} color={"error"}>
+        Something went wrong
+      </Typography>
+    );
+  }
 
   return (
-    <Container sx={{maxWidth: 1000, maxHeight: 800, position: "relative"}}>
+    <Container sx={{ maxWidth: 1000, maxHeight: 800, position: "relative" }}>
       <CustomGrid
         data={projects || []}
         columns={[...columns, ...additionalColumns]}
@@ -125,41 +156,41 @@ export default function Projects() {
           return res;
         }}
       />
-      <CustomDialog
-        isOpen={isDialogOpen}
-        fetchData={async () => {
-          const employees = await Fetch.getEmployees();
-          const project = projects?.find((p) => p.id == projectIdRef.current);
-          return employees.filter((e) => !project?.employeeIds.includes(e.id));
-        }}
-        onCancel={() => {
-          if (confirm("Any changes will be discarded. Continue ?")) {
-            setIsDialogOpen(false);
-            return true;
-          }
-          return false;
-        }}
-        onApprove={async (addedIds: number[]) => {
-          console.log("ADDED ID`S: ", addedIds);
-          const project = projects?.find((p) => p.id == projectIdRef.current);
-          if (project) {
+      {isLoading || isEmployeesLoading ? (
+        ""
+      ) : (
+        <CustomDialog
+          isOpen={isDialogOpen}
+          fetchData={async () => {
+            const project = projects.find((p) => p.id == projectIdRef.current);
+            return employees.filter(
+              (e) => !project?.employeeIds.includes(e.id)
+            );
+          }}
+          onCancel={() => {
+            if (confirm("Any changes will be discarded. Continue ?")) {
+              setIsDialogOpen(false);
+              return true;
+            }
+            return false;
+          }}
+          onApprove={async (addedIds: number[]) => {
+            console.log("ADDED ID`S: ", addedIds);
+            const project = projects.find((p) => p.id == projectIdRef.current)!;
             project.employeeIds = [...project.employeeIds, ...addedIds];
-            console.log("SENDING: ", project);
-            const res = await Fetch.updateProject(project);
-            console.log("UPDATE RES: ", res);
-            queryClient.invalidateQueries(["projects"]);
-          }
-        }}
-        cacheHash={"project-employees" + projectIdRef.current}
-        close={() => {
-          setIsDialogOpen(false);
-        }}
-        invalidateCache={async () => {
-          return;
-        }}
-        title="Add Employees"
-      />
+            mutator.mutate(project);
+          }}
+          cacheHash={"project-employees" + projectIdRef.current}
+          close={() => {
+            setIsDialogOpen(false);
+          }}
+          invalidateCache={async () => {
+            return;
+          }}
+          title="Add Employees"
+        />
+      )}
       <AddProject />
-      </Container>
+    </Container>
   );
 }

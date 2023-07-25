@@ -1,44 +1,24 @@
-import { MenuItem, OutlinedInput, Select, TextField } from "@mui/material";
+import {
+  LinearProgress,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  TextField,
+} from "@mui/material";
 import AddBase from "./AddBase";
 import { ChangeEvent, useState } from "react";
 import Fetch from "../lib/lib";
-
-const employees = [
-  {
-    id: 0,
-    name: "Lena Mathis",
-    rating: 0.5746,
-    projectIds: [19, 31, 46, 23, 12, 26, 42, 16, 21, 38],
-  },
-  {
-    id: 1,
-    name: "Margret Monroe",
-    rating: 1.189,
-    projectIds: [48, 6, 4, 7, 32, 24, 43, 35, 13, 14],
-  },
-  {
-    id: 2,
-    name: "Harmon Sloan",
-    rating: 4.0467,
-    projectIds: [8, 24, 15, 9, 49, 39, 34, 26, 15, 32],
-  },
-  {
-    id: 3,
-    name: "Tricia Vargas",
-    rating: 3.4528,
-    projectIds: [31, 6, 10, 15, 12, 31, 23, 31, 16, 26],
-  },
-  {
-    id: 4,
-    name: "Valencia Glover",
-    rating: 3.5504,
-    projectids: [27, 8, 27, 23, 42, 1, 26, 5, 18, 17],
-  },
-];
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export default function AddProject() {
   const [selecteds, setSelecteds] = useState<number[]>([]);
   const [project, setProject] = useState({ name: "", code: "" });
+  const {
+    data: employees,
+    isLoading,
+    isError,
+  } = useQuery(["employees"], Fetch.getEmployees);
+  const quertClient = useQueryClient();
 
   function handleChange(event: ChangeEvent<any>) {
     const {
@@ -58,10 +38,11 @@ export default function AddProject() {
 
   async function handleCreate() {
     console.log("PROJECT: ", { ...project, employeeIds: selecteds });
-    return await Fetch.createProject({
+    await Fetch.createProject({
       ...project,
       employeeIds: selecteds,
     } as Project);
+    quertClient.invalidateQueries(["projects"]);
   }
 
   return (
@@ -82,21 +63,32 @@ export default function AddProject() {
       />
       <Select
         value={selecteds}
+        variant="standard"
+        placeholder="Select Employees"
         renderValue={(selecteds) => {
+          if (isLoading) {
+            return <LinearProgress />;
+          }
+
+          if (isError) {
+            return "Failed to load employees";
+          }
+
           return employees
             .filter((e) => selecteds.includes(e.id))
             .map((e) => e.name)
             .join(", ");
         }}
-        input={<OutlinedInput label="Select employees" />}
+        // input={<TextField label="Select employees" />}
         multiple
         onChange={handleChange as any}
       >
-        {employees.map((e) => (
-          <MenuItem key={e.id} aria-label={e.name} value={e.id}>
-            {e.name}
-          </MenuItem>
-        ))}
+        {employees &&
+          employees.map((e) => (
+            <MenuItem key={e.id} aria-label={e.name} value={e.id}>
+              {e.name}
+            </MenuItem>
+          ))}
       </Select>
     </AddBase>
   );

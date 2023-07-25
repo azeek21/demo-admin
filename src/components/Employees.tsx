@@ -1,7 +1,13 @@
 import { GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import CustomGrid from "./CustomGrid";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { CircularProgress, Container, IconButton, MenuItem, Typography } from "@mui/material";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  CircularProgress,
+  Container,
+  IconButton,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import SelectButton from "./SelectButton";
 import { Delete } from "@mui/icons-material";
 import Fetch from "../lib/lib";
@@ -35,6 +41,19 @@ export default function Employees() {
     // isError: isProjectsError,
   } = useQuery(["projects"], Fetch.getProjects);
 
+  const mutator = useMutation({
+    mutationFn: async (employee: Employee) => {
+      console.log("Mutating E: ", employee);
+      await Fetch.updateEmployee(employee);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["employees"]);
+    },
+    onError: (e) => {
+      alert(e);
+    },
+  });
+
   const queryClient = useQueryClient();
 
   const additionalColumns: GridColDef[] = [
@@ -58,11 +77,6 @@ export default function Employees() {
                     }}
                   >
                     {project.name}
-                    <IconButton sx={{ ml: "auto" }} onClick={() => {
-                      // Fetch.deleteEmployee()
-                    }}>
-                      <Delete />
-                    </IconButton>
                   </MenuItem>
                 ))
             ) : isProjectsLoading ? (
@@ -91,21 +105,24 @@ export default function Employees() {
   ];
 
   if (isError) {
-    return <Typography typography={'h1'} color={'error'}>Something went wrong</Typography>
+    return (
+      <Typography typography={"h1"} color={"error"}>
+        Something went wrong
+      </Typography>
+    );
   }
 
   return (
-    <Container sx={{maxWidth: 1000, maxHeight: 800, position: 'relative'}}>
+    <Container sx={{ maxWidth: 1000, maxHeight: 800, position: "relative" }}>
       <CustomGrid
         data={employees || []}
         columns={[...columns, ...additionalColumns]}
         isLoading={isLoading}
         onRowEditStop={async (updatedEmployee: Employee) => {
-          const res = await Fetch.updateEmployee(updatedEmployee);
-          return res;
+          mutator.mutate(updatedEmployee);
         }}
       />
       <AddEmployee />
-      </Container>
-);
+    </Container>
+  );
 }

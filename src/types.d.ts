@@ -26,11 +26,18 @@ type Employee = {
 
 type Feedback = {
   id: number;
-  from: string;
-  team: string;
+  userId: number;
+  projectId: number;
+  employeeIds: number[];
   grade: number;
-  content: string;
-  employees: number[];
+  comment: string;
+  created: string;
+};
+
+type User = {
+  id: number;
+  name: string;
+  projectId: number;
 };
 
 type LoginData = {

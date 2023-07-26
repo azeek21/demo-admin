@@ -1,58 +1,10 @@
-import { GridColDef } from "@mui/x-data-grid";
+import { GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import CustomGrid from "./CustomGrid";
-import {
-  useMutation,
-  useQueries,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { Box, IconButton, Typography } from "@mui/material";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Box, Typography } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import Fetch from "../lib/lib";
 import { getProject } from "../utils/utils";
-
-const users = [
-  {
-    id: 0,
-    name: "Edwards",
-  },
-  {
-    id: 1,
-    name: "Mccullough",
-  },
-  {
-    id: 2,
-    name: "Berry",
-  },
-  {
-    id: 3,
-    name: "Leta",
-  },
-  {
-    id: 4,
-    name: "Logan",
-  },
-  {
-    id: 5,
-    name: "Jones",
-  },
-  {
-    id: 6,
-    name: "Lily",
-  },
-  {
-    id: 7,
-    name: "Nadia",
-  },
-  {
-    id: 8,
-    name: "Tia",
-  },
-  {
-    id: 9,
-    name: "Robyn",
-  },
-];
 
 const columns: GridColDef[] = [
   {
@@ -104,15 +56,19 @@ export default function Users() {
     },
     {
       field: "actions",
+      type: "actions",
+      flex: 0.3,
       getActions: (params: any) => [
-        <IconButton
+        <GridActionsCellItem
+          label="Delete"
+          icon={<Delete />}
           onClick={() => {
             mutate.mutate(params.row);
           }}
-        >
-          <Delete />
-        </IconButton>,
+        />,
       ],
+      disableColumnMenu: true,
+      hideSortIcons: true,
     },
   ];
 
@@ -140,6 +96,7 @@ export default function Users() {
   return (
     <>
       <CustomGrid
+        gridHash="users"
         columns={[...columns, ...dynamicColumns]}
         data={users}
         isLoading={isLoading || isProjectsLoading}

@@ -4,7 +4,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   CircularProgress,
   Container,
-  IconButton,
   MenuItem,
   Typography,
 } from "@mui/material";
@@ -25,6 +24,9 @@ const columns: GridColDef[] = [
     field: "rating",
     headerName: "Rating",
     minWidth: 100,
+    valueGetter: (param) => {
+      return param.value || "No rating.";
+    },
   },
 ];
 
@@ -43,7 +45,6 @@ export default function Employees() {
 
   const mutator = useMutation({
     mutationFn: async (employee: Employee) => {
-      console.log("Mutating E: ", employee);
       await Fetch.updateEmployee(employee);
     },
     onSuccess: () => {
@@ -70,15 +71,7 @@ export default function Employees() {
             {projects && params.row.projectIds.length > 0 ? (
               projects
                 .filter((p) => params.row.projectIds.includes(p.id))
-                .map((project: Project) => (
-                  <MenuItem
-                    onClick={() => {
-                      console.log("ITEM CLICK: ", project.name);
-                    }}
-                  >
-                    {project.name}
-                  </MenuItem>
-                ))
+                .map((project: Project) => <MenuItem>{project.name}</MenuItem>)
             ) : isProjectsLoading ? (
               <CircularProgress />
             ) : (
@@ -115,6 +108,7 @@ export default function Employees() {
   return (
     <Container sx={{ maxWidth: 1000, maxHeight: 800, position: "relative" }}>
       <CustomGrid
+        gridHash="employees"
         data={employees || []}
         columns={[...columns, ...additionalColumns]}
         isLoading={isLoading}

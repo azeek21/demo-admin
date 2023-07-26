@@ -1,6 +1,12 @@
 import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Index() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/feedbacks");
+  }, []);
   return (
     <Box>
       <Typography typography="h1">Welcome</Typography>

@@ -35,6 +35,9 @@ const columns: GridColDef[] = [
     field: "rating",
     headerName: "Rating",
     minWidth: 120,
+    valueGetter: (param) => {
+      return param.value || "No rating.";
+    },
   },
 ];
 
@@ -147,6 +150,7 @@ export default function Projects() {
   return (
     <Container sx={{ maxWidth: 1000, maxHeight: 800, position: "relative" }}>
       <CustomGrid
+        gridHash="projects"
         data={projects || []}
         columns={[...columns, ...additionalColumns]}
         isLoading={isLoading}
@@ -175,7 +179,6 @@ export default function Projects() {
             return false;
           }}
           onApprove={async (addedIds: number[]) => {
-            console.log("ADDED ID`S: ", addedIds);
             const project = projects.find((p) => p.id == projectIdRef.current)!;
             project.employeeIds = [...project.employeeIds, ...addedIds];
             mutator.mutate(project);

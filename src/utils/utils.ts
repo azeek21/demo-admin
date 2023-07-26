@@ -1,6 +1,5 @@
 function getProject(projects: Project[], id: number): Project {
   const res = projects.find((p) => p.id == id)!;
-  console.log("FOUND PROJECT: ", res, projects, id);
   return res;
 }
 

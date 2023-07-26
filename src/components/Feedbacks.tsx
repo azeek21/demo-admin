@@ -41,8 +41,6 @@ export default function Feedbacks() {
 
   const quertClient = useQueryClient();
 
-  console.log("FED UP YOU DID HUH?");
-
   if (isUsersError || isProjectsError || isEmployeesError || isFeedbacksError) {
     return (
       <Box

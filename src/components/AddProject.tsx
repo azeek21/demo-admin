@@ -1,10 +1,4 @@
-import {
-  LinearProgress,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  TextField,
-} from "@mui/material";
+import { LinearProgress, MenuItem, Select, TextField } from "@mui/material";
 import AddBase from "./AddBase";
 import { ChangeEvent, useState } from "react";
 import Fetch from "../lib/lib";
@@ -24,7 +18,6 @@ export default function AddProject() {
     const {
       target: { value, name },
     } = event;
-    console.log("CHANGE: ", value, name);
     if (typeof value == "string") {
       setProject((old) => ({
         ...old,
@@ -37,7 +30,6 @@ export default function AddProject() {
   }
 
   async function handleCreate() {
-    console.log("PROJECT: ", { ...project, employeeIds: selecteds });
     await Fetch.createProject({
       ...project,
       employeeIds: selecteds,
@@ -46,7 +38,15 @@ export default function AddProject() {
   }
 
   return (
-    <AddBase title="Add project" onSave={handleCreate} onCancel={() => {}}>
+    <AddBase
+      title="Add project"
+      onSave={handleCreate}
+      onCancel={() => {
+        return confirm(
+          "Changes you made will be cancelled if you cancel without saving. Are you sure to cancel ?"
+        );
+      }}
+    >
       <TextField
         label="Name"
         required

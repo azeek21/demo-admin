@@ -1,20 +1,25 @@
 import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+const LOGIN = import.meta.env.VITE_LOGIN;
+const PASS = import.meta.env.VITE_PASSWORD;
 class Auth {
   static async login(data: LoginData) {
-  return true;
-    try {
-      const resp = await axios.post(BASE_URL + "auth/login", data);
-      if (resp.data.success) {
-        return true;
-      }
-    } catch (err) {
-      console.log(err);
-      return false;
+    if (data.login == LOGIN && data.password == PASS) {
+      return true;
     }
+
     return false;
+    // try {
+    //   const resp = await axios.post(BASE_URL + "auth/login", data);
+    //   if (resp.data.success) {
+    //     return true;
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   return false;
+    // }
+    // return false;
   }
 
   static async isAuthenticated() {
@@ -25,8 +30,8 @@ class Auth {
   static async logout() {
     return true;
     try {
-    await axios.post(BASE_URL + '/logout');
-    return true;
+      await axios.post(BASE_URL + "/logout");
+      return true;
     } catch (error) {
       return false;
     }

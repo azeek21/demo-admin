@@ -31,8 +31,6 @@ export default function Login() {
   };
 
   const handleLogin = async () => {
-    console.log("heyy");
-
     if (!loginData.login || !loginData.password) {
       setLoginError({
         error: true,

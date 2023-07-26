@@ -1,7 +1,6 @@
 import { Add, Cancel, Save } from "@mui/icons-material";
 import {
   DialogActions,
-  Portal,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -15,10 +14,15 @@ import { useState, PropsWithChildren } from "react";
 interface IAddBase extends PropsWithChildren {
   title: string;
   onSave: () => Promise<void>;
-  onCancel: VoidFunction;
+  onCancel: () => boolean;
 }
 
-export default function AddBase({ children, title, onSave }: IAddBase) {
+export default function AddBase({
+  children,
+  title,
+  onSave,
+  onCancel,
+}: IAddBase) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,7 +42,13 @@ export default function AddBase({ children, title, onSave }: IAddBase) {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button>
+          <Button
+            onClick={() => {
+              if (onCancel()) {
+                setIsOpen(false);
+              }
+            }}
+          >
             Cancel
             <Cancel />
           </Button>

@@ -10,15 +10,12 @@ const ENDPOINT = {
 
 class Fetch {
   static async getEmployees(): Promise<Employee[]> {
-    console.log("URL: ", ENDPOINT.employees);
     const res = await axios.get(ENDPOINT.employees);
-    console.log("FETCHED EMPLOYEES: ", res.data);
     return res.data;
   }
 
   static async getProjects(): Promise<Project[]> {
     const res = await axios.get(ENDPOINT.projects);
-    console.log("FETCHED PROJECTS: ", res.data);
     return res.data;
   }
 
@@ -54,24 +51,22 @@ class Fetch {
   }
 
   static async createProject(project: Project) {
-    console.log("CREATING PROJECTS: ", project);
     const resp = await axios.post(ENDPOINT.projects, project);
     return resp.data;
   }
 
   static async createEmployee(employee: Employee) {
-    console.log("CREATING EMPLOYESS: ", employee);
     const resp = await axios.post(ENDPOINT.employees, employee);
     return resp.data;
   }
 
   static async deleteFeedback(id: number) {
-    const res = await axios.delete(ENDPOINT.feedbacks + "/" + id);
+    await axios.delete(ENDPOINT.feedbacks + "/" + id);
     return true;
   }
 
   static async deleteUser(user: User) {
-    const res = await axios.delete(ENDPOINT.users + "/" + user.id);
+    await axios.delete(ENDPOINT.users + "/" + user.id);
     return true;
   }
 }

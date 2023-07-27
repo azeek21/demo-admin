@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-const LOGIN = import.meta.env.VITE_LOGIN;
-const PASS = import.meta.env.VITE_PASSWORD;
+const BASE_URL = import.meta.env.VITE_BASE_URL || process.env.BASE_URL;
+const LOGIN = import.meta.env.VITE_LOGIN || process.env.LOGIN;
+const PASS = import.meta.env.VITE_PASSWORD || process.env.PASSWORD;
+
 class Auth {
   static async login(data: LoginData) {
     if (data.login == LOGIN && data.password == PASS) {

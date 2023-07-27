@@ -2,7 +2,6 @@ function getProject(projects: Project[], id: number): Project {
   const res = projects.find((p) => p.id == id)!;
   return res;
 }
-
 function getEmployee(employees: Employee[], id: number): Employee {
   return employees.find((e) => e.id == id)!;
 }

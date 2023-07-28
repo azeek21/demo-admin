@@ -89,7 +89,7 @@ export default function Projects() {
                   setIsDialogOpen(true);
                 }}
               >
-                Add project <AddOutlined sx={{ ml: 1 }} />
+                Add employee <AddOutlined sx={{ ml: 1 }} />
               </Button>
             </MenuItem>
 

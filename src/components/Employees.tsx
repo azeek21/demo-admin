@@ -40,7 +40,7 @@ export default function Employees() {
   const {
     data: projects,
     isLoading: isProjectsLoading,
-    // isError: isProjectsError,
+    isError: isProjectsError,
   } = useQuery(["projects"], Fetch.getProjects);
 
   const mutator = useMutation({
@@ -97,7 +97,7 @@ export default function Employees() {
     },
   ];
 
-  if (isError) {
+  if (isError || isProjectsError) {
     return (
       <Typography typography={"h1"} color={"error"}>
         Something went wrong

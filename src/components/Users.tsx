@@ -51,7 +51,10 @@ export default function Users() {
       headerName: "Project",
       flex: 1,
       renderCell: (params) => {
-        return getProject(projects || [], params.row.projectId).name;
+        return (
+          getProject(projects || [], params.row.projectId)?.name ||
+          "Project not found"
+        );
       },
     },
     {

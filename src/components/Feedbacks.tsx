@@ -121,7 +121,8 @@ export default function Feedbacks() {
                 <Box
                   sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
                 >
-                  <Person /> {getUser(users, f.userId).name}
+                  <Person />{" "}
+                  {getUser(users, f.userId)?.name || "User not found"}
                 </Box>
               }
               subheader={
@@ -130,14 +131,18 @@ export default function Feedbacks() {
                 >
                   <Groups />
                   <Typography>
-                    {getProject(projects, f.projectId).name}
+                    {getProject(projects, f.projectId)?.name ||
+                      "Project not found"}
                   </Typography>
 
                   {f &&
                     f.employeeIds.map((e) => (
                       <Chip
                         key={e}
-                        label={getEmployee(employees, e).name}
+                        label={
+                          getEmployee(employees, e)?.name ||
+                          "Employee not found"
+                        }
                         size="small"
                       />
                     ))}

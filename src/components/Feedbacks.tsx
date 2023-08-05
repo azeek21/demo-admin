@@ -135,7 +135,7 @@ export default function Feedbacks() {
                       "Project not found"}
                   </Typography>
 
-                  {f &&
+                  {f.employeeIds ? (
                     f.employeeIds.map((e) => (
                       <Chip
                         key={e}
@@ -145,7 +145,10 @@ export default function Feedbacks() {
                         }
                         size="small"
                       />
-                    ))}
+                    ))
+                  ) : (
+                    <Typography>No employee selected</Typography>
+                  )}
                 </Box>
               }
               action={
@@ -195,7 +198,7 @@ export default function Feedbacks() {
               }
             />
             <CardContent>
-              <Typography>{f.comment}</Typography>
+              <Typography>{f?.comment || "No comment"}</Typography>
             </CardContent>
           </Card>
         ))}
